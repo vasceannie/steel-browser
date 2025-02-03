@@ -6,11 +6,14 @@ services:
       dockerfile: Dockerfile
       args:
         NODE_VERSION: 22.13.0
-    ports:
-      - "3000:3000"
-      - "9223:9223"
+    restart: unless-stopped
+    expose:
+      - 3000
+      - 9223
     volumes:
       - ./.cache:/app/.cache
+    environment:
+      - NODE_ENV=development
     networks:
       - steel-network
 
@@ -22,12 +25,14 @@ services:
         VITE_API_URL: ${VITE_API_URL:-http://api:3000}
         VITE_WS_URL: ${VITE_WS_URL:-ws://api:3000}
         VITE_OPENAPI_URL: ${VITE_OPENAPI_URL:-http://api:3000/documentation/json}
+    restart: unless-stopped
     ports:
-      - "5173:5173"
+      - 5173
     environment:
       - VITE_API_URL=${VITE_API_URL:-http://api:3000}
       - VITE_WS_URL=${VITE_WS_URL:-ws://api:3000}
       - VITE_OPENAPI_URL=${VITE_OPENAPI_URL:-http://api:3000/documentation/json}
+      - NODE_ENV=development
     depends_on:
       - api
     networks:
