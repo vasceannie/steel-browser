@@ -26,7 +26,7 @@ services:
         VITE_WS_URL: ${VITE_WS_URL:-ws://api:3000}
         VITE_OPENAPI_URL: ${VITE_OPENAPI_URL:-http://api:3000/documentation/json}
     restart: unless-stopped
-    ports:
+    expose:
       - 5173
     environment:
       - VITE_API_URL=${VITE_API_URL:-http://api:3000}
