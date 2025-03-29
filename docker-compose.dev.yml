@@ -9,6 +9,8 @@ services:
     expose:
       - 3000
       - 9223
+    ports:
+      - 9223:9223
     volumes:
       - ./.cache:/app/.cache
     environment:
