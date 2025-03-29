@@ -13,6 +13,8 @@ services:
       - 9223:9223
     volumes:
       - ./.cache:/app/.cache
+    environment:
+      - HOST=${API_HOST:-steel-api.lab}
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/documentation"]
       interval: 30s
