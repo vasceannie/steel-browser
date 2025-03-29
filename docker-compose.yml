@@ -1,9 +1,9 @@
 services:
   api:
     image: ghcr.io/steel-dev/steel-browser-api:latest
-    ports:
-      - 3000:3000
-      - 9223:9223
+    expose:
+      - 3000
+      - 9223
     volumes:
       - ./.cache:/app/.cache
     environment:
@@ -13,8 +13,8 @@ services:
 
   ui:
     image: ghcr.io/steel-dev/steel-browser-ui:latest
-    ports:
-      - "5173:5173"
+    expose:
+      - 5173
     depends_on:
       - api
     networks:
