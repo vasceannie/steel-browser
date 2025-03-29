@@ -122,7 +122,7 @@ main() {
     
     # Set required environment variables
     export CDP_REDIRECT_PORT=9223
-    export HOST=0.0.0.0
+    export HOST=steel-api.lab
     export DISPLAY=:10
     
     # Log environment state
