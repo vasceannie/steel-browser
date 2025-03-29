@@ -94,11 +94,11 @@ export class CDPService extends EventEmitter {
   }
 
   public getDebuggerUrl() {
-    return `http://${env.DOMAIN ?? env.HOST}:${env.CDP_REDIRECT_PORT}/devtools/devtools_app.html`;
+    return `http://${env.HOST}:${env.CDP_REDIRECT_PORT}/devtools/devtools_app.html`;
   }
 
   public getDebuggerWsUrl(pageId?: string) {
-    return `ws://${env.DOMAIN ?? env.HOST}:${env.CDP_REDIRECT_PORT}/devtools/page/${pageId ?? this.getTargetId(this.primaryPage!)}`;
+    return `ws://${env.HOST}:${env.CDP_REDIRECT_PORT}/devtools/page/${pageId ?? this.getTargetId(this.primaryPage!)}`;
   }
 
   public customEmit(event: EmitEvent, payload: any) {
