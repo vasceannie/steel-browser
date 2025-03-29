@@ -15,6 +15,7 @@ services:
       - ./.cache:/app/.cache
     environment:
       - HOST=${HOST:-0.0.0.0}
+      - DOMAIN=${DOMAIN:-steel.lab}
       - VITE_API_URL=${VITE_API_URL:-http://api:3000}
       - CDP_REDIRECT_PORT=${CDP_REDIRECT_PORT:-9223}
     healthcheck:
