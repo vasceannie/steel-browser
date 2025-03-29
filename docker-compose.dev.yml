@@ -9,15 +9,12 @@ services:
     expose:
       - 3000
       - 9223
-    ports:
-      - 9223:9223
     volumes:
       - ./.cache:/app/.cache
     environment:
-      - HOST=${API_HOST:-steel-api.lab}
-    extra_hosts:
-      - "steel-api.lab:127.0.0.1"
-      - "steel.lab:127.0.0.1"
+      - HOST=${HOST:-0.0.0.0}
+      - VITE_API_URL=${VITE_API_URL:-http://api:3000}
+      - CDP_REDIRECT_PORT=${CDP_REDIRECT_PORT:-9223}
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/documentation"]
       interval: 30s
@@ -33,15 +30,15 @@ services:
       context: .
       dockerfile: ./ui/Dockerfile
       args:
-        VITE_API_URL: ${VITE_API_URL:-http://api:3000}
-        VITE_WS_URL: ${VITE_WS_URL:-ws://api:3000}
-        VITE_OPENAPI_URL: ${VITE_OPENAPI_URL:-http://api:3000/documentation/json}
+        VITE_API_URL: ${VITE_API_URL:-http://steel.lab/api}
+        VITE_WS_URL: ${VITE_WS_URL:-ws://steel.lab/api}
+        VITE_OPENAPI_URL: ${VITE_OPENAPI_URL:-http://steel.lab/api/documentation/json}
     expose:
       - 5173
     environment:
-      - VITE_API_URL=${VITE_API_URL:-http://api:3000}
-      - VITE_WS_URL=${VITE_WS_URL:-ws://api:3000}
-      - VITE_OPENAPI_URL=${VITE_OPENAPI_URL:-http://api:3000/documentation/json}
+      - VITE_API_URL=${VITE_API_URL:-http://steel.lab/api}
+      - VITE_WS_URL=${VITE_WS_URL:-ws://steel.lab/api}
+      - VITE_OPENAPI_URL=${VITE_OPENAPI_URL:-http://steel.lab/api/documentation/json}
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5173"]
       interval: 30s
